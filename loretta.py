@@ -2,12 +2,13 @@ class LoReTTa:
     """
     Pseudo-code for commutative and transitive modeling
     """
+    
     def forward(self, tokens, modes=['commutative','transitive']):
         """
         tokens ... tokenized inputs, e.g., [x_0,...x_n, y_0,...,y_m]
         x_0, y_0 .... modality-specific tokens, 'a', 'b', or 'c'
         """
-      
+        
         if 'commutative' in modes: #shuffle modalities
             tokens = self.shuffle_modalities(tokens)
           
