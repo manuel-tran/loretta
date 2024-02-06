@@ -1,4 +1,4 @@
-# LoReTTa
+# Training Transitive and Commutative Multimodal Transformers with LoReTTa
 Training Transitive and Commutative Multimodal Transformers with LoReTTa (NeurIPS 2023)
 
 ## Method overview
