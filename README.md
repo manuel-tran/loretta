@@ -7,5 +7,5 @@ This is the official repository for the multimodal learning paradigm LoReTTa ($`
 
 ## Model architecture
 
-Our multimodal model is based on the modern implementation of the Transformer decoder, most notably [LLama](https://github.com/facebookresearch/llama/blob/main/llama/model.py) and [Mistral](https://github.com/mistralai/mistral-src/blob/main/mistral/model.py). Alternative models that can process sequences such as [Hyena](https://github.com/HazyResearch/flash-fft-conv) or [Mamba](https://github.com/state-spaces/mamba) can also be used.
+Our multimodal model is based on the modern implementation of the Transformer decoder, most notably [LLama](https://github.com/facebookresearch/llama/blob/main/llama/model.py) and [Mistral](https://github.com/mistralai/mistral-src/blob/main/mistral/model.py). We recommend enabling [FlashAttention-2](https://github.com/Dao-AILab/flash-attention) to speed up training and inference time. Alternative models that can process sequences such as [Hyena](https://github.com/HazyResearch/flash-fft-conv) or [Mamba](https://github.com/state-spaces/mamba) can also be used.
 
