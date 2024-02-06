@@ -16,35 +16,35 @@ class LoReTTa:
             existing_modalities = self.extract_modality_tokens(tokens)
           
             if ['a', 'b'] in existing_modalities: #case 1
-                modality_a, modality_b = self.split_tokens(tokens)
-                modality_c = self.model.generate([modality_b, 'c'])
-                tokens = [modality_c, modality_a]
+                tokens_a, tokens_b = self.split_tokens(tokens)
+                tokens_c = self.model.generate([tokens_b, 'c'])
+                tokens = [tokens_c, tokens_a]
               
             if ['b', 'c'] in existing_modalities: #case 2
-                modality_b, modality_c = self.split_tokens(tokens)
-                modality_a = self.model.generate([modality_b, 'a'])
-                tokens = [modality_a, modality_c]
+                tokens_b, tokens_c = self.split_tokens(tokens)
+                tokens_a = self.model.generate([tokens_b, 'a'])
+                tokens = [tokens_a, tokens_c]
               
             if ['a'] in existing_modalities \ #case 3
                 and len(existing_modalities) == 1: #edge case with on modality
-                modality_b = self.model.generate([modality_a, 'b'])
-                modality_c = self.model.generate([modality_b, 'c'])
-                tokens = [modality_c, modality_a]
+                tokens_b = self.model.generate([tokens_a, 'b'])
+                tokens_c = self.model.generate([tokens_b, 'c'])
+                tokens = [tokens_c, tokens_a]
           
             if ['b'] in existing_modalities \ #case 4
                 and len(existing_modalities) == 1: #edge case with on modality
-                modality_a = self.model.generate([modality_b, 'a'])
-                modality_c = self.model.generate([modality_b, 'c'])
-                tokens = self.shuffle_modalities([modality_a, modality_c])
+                tokens_a = self.model.generate([tokens_b, 'a'])
+                tokens_c = self.model.generate([tokens_b, 'c'])
+                tokens = self.shuffle_modalities([tokens_a, tokens_c])
           
             if ['c'] in existing_modalities \ #case 5
                 and len(existing_modalities) == 1: #edge case with on modality
-                modality_b = self.model.generate([modality_c, 'b'])
-                modality_a = self.model.generate([modality_b, 'a'])
-                tokens = [modality_a, modality_c]
+                tokens_b = self.model.generate([tokens_c, 'b'])
+                tokens_a = self.model.generate([tokens_b, 'a'])
+                tokens = [tokens_a, tokens_c]
           
             if self.prob_use_all_modalities < rand(1): #occcasionally use all modalities
-                tokens = self.shuffle_modalities([modality_a, modality_b, modality_c])
+                tokens = self.shuffle_modalities([tokens_a, tokens_b, tokens_c])
               
         logits = self.model(tokens[:, :-1]) #get predictions
         targets = tokens[:, +1:] #shift targets
