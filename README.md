@@ -7,3 +7,5 @@ This is the official repository for the multimodal learning paradigm LoReTTa ($`
 
 ## Model architecture
 
+Our multimodal model is based on the modern implementation of the Transformer decoder, most notably [LLama](https://github.com/facebookresearch/llama/blob/main/llama/model.py)
+
