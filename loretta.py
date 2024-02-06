@@ -5,8 +5,8 @@ class LoReTTa:
     
     def forward(self, tokens, modes=['commutative','transitive']):
         """
-        tokens ... tokenized inputs, e.g., [x_0,...x_n, y_0,...,y_m]
-        x_0, y_0 .... modality-specific tokens, 'a', 'b', or 'c'
+        tokens ... tokenized inputs, e.g., [a_0,...,a_n, b_0,...,b_m]
+        a_0, b_0 .... modality-specific tokens, e.g., 'a', 'b', or 'c'
         """
         
         if 'commutative' in modes: #shuffle modalities
@@ -26,19 +26,19 @@ class LoReTTa:
                 tokens = [tokens_a, tokens_c]
               
             if ['a'] in existing_modalities \ #case 3
-                and len(existing_modalities) == 1: #edge case with on modality
+                and len(existing_modalities) == 1: #edge case with one modality
                 tokens_b = self.model.generate([tokens_a, 'b'])
                 tokens_c = self.model.generate([tokens_b, 'c'])
                 tokens = [tokens_c, tokens_a]
           
             if ['b'] in existing_modalities \ #case 4
-                and len(existing_modalities) == 1: #edge case with on modality
+                and len(existing_modalities) == 1: #edge case with one modality
                 tokens_a = self.model.generate([tokens_b, 'a'])
                 tokens_c = self.model.generate([tokens_b, 'c'])
                 tokens = self.shuffle_modalities([tokens_a, tokens_c])
           
             if ['c'] in existing_modalities \ #case 5
-                and len(existing_modalities) == 1: #edge case with on modality
+                and len(existing_modalities) == 1: #edge case with one modality
                 tokens_b = self.model.generate([tokens_c, 'b'])
                 tokens_a = self.model.generate([tokens_b, 'a'])
                 tokens = [tokens_a, tokens_c]
