@@ -1,5 +1,8 @@
-# LoReTTa
-Official repository for LoReTTa ($`\textbf{L}`$inking m$`\textbf{O}`$dalities with a t$`\textbf{R}`$ansitive and commutativ$`\textbf{E}`$ pre-$`\textbf{T}`$raining s$`\textbf{T}`$r$`\textbf{A}`$tegy) @ NeurIPS 2023. While we regret that we cannot release the full code due to internal policy, we do our best to guide interested researchers in reproducing or implementing our work.
+# LoReTTa @ NeurIPS 2023
+Official repository for LoReTTa ($`\textbf{L}`$inking m$`\textbf{O}`$dalities with a t$`\textbf{R}`$ansitive and commutativ$`\textbf{E}`$ pre-$`\textbf{T}`$raining s$`\textbf{T}`$r$`\textbf{A}`$tegy). [[arXiv](https://arxiv.org/abs/2305.14243)] [[website](https://nips.cc/virtual/2023/poster/70522)]
+
+
+While we regret that we cannot release the full code due to internal policy, we do our best to guide interested researchers in reproducing or implementing our work.
 
 ## Model architecture
 
