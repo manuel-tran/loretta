@@ -8,11 +8,11 @@ While we regret that we cannot release the full code due to company policy, we d
 
 Imagine we have two datasets, one with paired image and text, and one with paired text and audio. How do we train a multimodal model that also works with paired image and audio? Here we introduce commutative and transitive pre-training: 
 
-1. We train a Transformer to generate image from text, text from image, text from audio, and audio from text.
-2. Given a paired sample, e.g. (image, text), we use the text to generate audio as a pseudo data point.
-3. The generated audio, which is aligned with the text, is then used as a new context to generate an image.
+1. Train a model to generate image from text, text from image, text from audio, and audio from text.
+2. Given a paired sample (image, text), we use the text to generate audio as a pseudo data point.
+3. The generated audio, aligned with the text, is then used as conditioning to generate an image.
 4. The generated image is compared to the original image in (image, text) to enforce consistency.
-5. In this way, we have connected image and audio.
+5. This is how we connect image and audio. This also works the other way around with (text, audio).
 
 ## Models
 
