@@ -176,6 +176,59 @@ class AudioDataset(Dataset):
         return len(self.data)
 
 
+class AlignedDataset2M(Dataset):
+    """
+    Create a dataset of two aligned modalitities
+    """
+    def __init__(self, dataset_1, dataset_2, transform=None):
+        self.dataset_1 = dataset_1
+        self.dataset_2 = dataset_2
+        self.transform = transform
+
+        assert (len(dataset_1) == len(dataset_2))
+
+    def __getitem__(self, idx):
+        x_1 = self.dataset_1[idx][0]
+        x_2 = self.dataset_2[idx][0]
+        y_1 = self.dataset_1[idx][1]
+        y_2 = self.dataset_2[idx][1]
+        assert y_1 == y_2
+        return (x_1, x_2), y_1
+
+    def __len__(self):
+        return len(self.dataset_1)
+
+
+class AlignedDataset3M(Dataset):
+    """
+    Create a dataset of three aligned modalitities
+    """
+    def __init__(self, dataset_1, dataset_2, missing=0, transform=None):
+        self.dataset_1 = dataset_1
+        self.dataset_2 = dataset_2
+        self.missing = missing
+        self.transform = transform
+
+        assert (len(dataset_1) == len(dataset_2))
+
+    def __getitem__(self, idx):
+
+        x_1 = self.dataset_1[idx][0]
+        x_2 = self.dataset_2[idx][0]
+        y_1 = self.dataset_1[idx][1]
+        y_2 = self.dataset_2[idx][1]
+        assert y_1 == y_2
+        if self.missing == 0:
+            return (float('-inf'), x_1, x_2), y_1
+        if self.missing == 1:
+            return (x_1, float('-inf'), x_2), y_1
+        if self.missing == 2:
+            return (x_1, x_2, float('-inf')), y_1
+
+    def __len__(self):
+        return len(self.dataset_1)
+
+
 # -- Image
 
 seed_everything(SEED)
@@ -345,3 +398,17 @@ wav_transform = None
 
 x_train = np.digitize(x_train, right=True, bins=bins)
 wav_trainset = AudioDataset(x_train, y_train, wav_transform)
+
+# -- Alignment
+
+#img_to_txt_trainset = torchvision.datasets.MNIST(root=img_root, train=True, download=True, transform=img_transform)
+#img_to_txt_trainset.data = img_to_txt_trainset.data[img_to_txt_train]
+#img_to_txt_trainset.targets = img_to_txt_trainset.targets[img_to_txt_train]
+
+#txt_to_img_trainset = TextDataset(x_txt_train, y_txt_train, txt_transform)
+#txt_to_img_trainset.data = txt_to_img_trainset.data[txt_to_img_train]
+#txt_to_img_trainset.targets = txt_to_img_trainset.targets[txt_to_img_train]
+
+#img_txt_trainset = AlignedDataset2M(img_to_txt_trainset, txt_to_img_trainset)
+
+# ...
