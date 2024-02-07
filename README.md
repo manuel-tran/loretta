@@ -24,7 +24,7 @@ The input to the Transformer is a sequence of tokens. So we need to tokenize our
 
 ## Causal modeling
 
-The core of LoReTTa is next token prediction (also known as causal language modeling). It is currently one of the most powerful frameworks for generative pre-training due to its data efficiency, as training can be effectively parallelized using attention masks. During training the input and target are shifted by [one](https://github.com/jzhang38/TinyLlama/blob/bf122247c486b6b897050e98cbb7bedae8eeba73/pretrain/tinyllama.py#L165) and a [upper-triangular causal attention mask](https://github.com/karpathy/minGPT/blob/37baab71b9abea1b76ab957409a1cc2fbfba8a26/mingpt/model.py#L63) is used so that only the previous tokens can be used to predict the next one.
+The core of LoReTTa is next token prediction (also known as causal language modeling). It is currently one of the most powerful frameworks for generative pre-training due to its data efficiency, as training can be effectively parallelized using attention masks. During training the input and target are shifted by [one](https://github.com/jzhang38/TinyLlama/blob/bf122247c486b6b897050e98cbb7bedae8eeba73/pretrain/tinyllama.py#L219) and a [upper-triangular causal attention mask](https://github.com/karpathy/minGPT/blob/37baab71b9abea1b76ab957409a1cc2fbfba8a26/mingpt/model.py#L63) is used so that only the previous tokens can be used to predict the next one.
 
 ## Multimodality
 
