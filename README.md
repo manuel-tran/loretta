@@ -10,10 +10,11 @@ Imagine we have two training sets, one with paired image and text, and one with 
 
 Here we introduce commutative and transitive pre-training: 
 
-* Using causal modeling, we train a Transformer to generate image from text, text from image, text from audio, and audio from text.
-* Given a paired sample, e.g. (image, text), we use the text to generate audio as a pseudo data point.
-* The audio is then used as a new context to generate an image, which is compared to the original image in (image, text) to enforce consistency.
-* In this way, we have connected image and audio.
+1. We train a Transformer to generate image from text, text from image, text from audio, and audio from text.
+2. Given a paired sample, e.g. (image, text), we use the text to generate audio as a pseudo data point.
+3. The generated audio, which is aligned with the text, is then used as a new context to generate an image.
+4. The generated image is compared to the original image in (image, text) to enforce consistency.
+5. In this way, we have connected image and audio.
 
 ## Models
 
