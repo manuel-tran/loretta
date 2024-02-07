@@ -29,3 +29,7 @@ The core of LoReTTa is next token prediction (also known as causal language mode
 ## Multimodality
 
 Since language modeling only models the next token given previous tokens, these tokens can theoretically come from any modality -- in any order. This idea is explored in [DALLE](https://github.com/lucidrains/DALLE-pytorch/blob/58c1e1a4fef10725a79bd45cdb5581c03e3e59e7/dalle_pytorch/dalle_pytorch.py#L576) and [MMGPT](https://github.com/mugen-org/MUGEN_baseline/blob/eb0c35b82a1cc3058bbe364f59a423294fb59e20/lib/models/gpt/gpt.py#L109) to generate images from text and more. In a nutshell, these methods model the relation $`A \rightarrow B`$. We go one step further and model $`B \rightarrow A`$ as well. In fact, if the model has enough capacity, it can handle even more modality combinations, such as $`B \rightarrow C`$ and $`B \rightarrow A`$. To help the model better distinguish between different modalities, we prepend a class token (or modality token) to each modality.
+
+## Autoregressive decoding
+
+Given $`(A, B)`$, how do we generate the modality $`C`$ given $`B`$ for transitive modeling $`B \rightarrow C \rightarrow A`$? We use [autoregressive decoding] (https://github.com/karpathy/nanoGPT/blob/eba36e84649f3c6d840a93092cb779a260544d08/model.py#L306). The input to the model $`f`$ is the tokenized context $`B = [b_0, ...., b_n]`$ together with the class token of the target modality (in this case $`c_0`$). The model predicts the next token $`f([B, c_0]) = c_1`$. We do this iteratively and get $`f([B, c_0, c_1]) = c_2`$, ...
