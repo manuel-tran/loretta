@@ -4,7 +4,11 @@ Official repository for LoReTTa ($`\textbf{L}`$inking m$`\textbf{O}`$dalities wi
 
 While we regret that we cannot release the full code due to company policy, we do our best to guide researchers in implementing our work. We provide the dataset, pseudocode, and point to implementations of related work. 
 
-## Model architecture
+## Method
+
+Imagine we have two training sets, one with paired image and text, and one with paired text and audio. How do we train a multimodal model that also works with image and audio pairs, or all three modalities of image, text, and audio at the same time? Here we introduce commutative and transitive pre-training. Using causal modeling, we train a Transformer to generate image from text, text from image, text from audio, and audio from text. Given a paired sample, e.g. (image, text), we use the text to generate audio as a pseudo data point; the audio is then used as a new context to generate an image, which is compared to the original image in (image, text) to enforce consistency. In this way, we have connected image and audio.
+
+## Models
 
 Our multimodal model is based on the modern implementation of the Transformer decoder, most notably [LLama](https://github.com/facebookresearch/llama/blob/main/llama/model.py) and [Mistral](https://github.com/mistralai/mistral-src/blob/main/mistral/model.py). We recommend enabling [FlashAttention-2](https://github.com/Dao-AILab/flash-attention) to speed up training and inference time. Alternative models that can process sequences such as [Hyena](https://github.com/HazyResearch/flash-fft-conv) or [Mamba](https://github.com/state-spaces/mamba) can also be used.
 
