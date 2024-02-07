@@ -20,7 +20,7 @@ LoReTTa is a self-supervised learning framework that works with any modality-agn
 
 ## Tokenization
 
-The input to the Transformer is a sequence of tokens. So we need to tokenize our data. For images, we use image patches as tokens; for text, we use subwords as tokens; and so on. Since we are modeling the data in pixel space, we can either use the raw discretized values or pre-trained [VQ-VAEs](https://github.com/openai/DALL-E). It is also possible to model the data in [latent space](https://arxiv.org/abs/2309.17080) to avoid using VQ-VAEs.
+The input to the Transformer is a sequence of tokens. So we need to tokenize our data. For images, we use image patches as tokens; for text, we use subwords as tokens; and so on. Since we are modeling the data in pixel space, we can either use the raw discretized values or pre-trained [VQ-VAEs](https://github.com/openai/DALL-E). It is also possible to model the data in [latent space](https://arxiv.org/abs/2309.17080) to avoid using VQ-VAEs. In svl_mnist.py, we show an example using the byte values as tokens.
 
 ## Causal modeling
 
