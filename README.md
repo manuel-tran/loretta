@@ -6,7 +6,7 @@ While we regret that we cannot release the full code due to company policy, we d
 
 ## Method
 
-Imagine we have two datasets, one with paired image and text, and one with paired text and audio. How do we train a multimodal model that also works with paired image and audio? Here we introduce commutative and transitive pre-training: 
+Imagine we have two datasets, one with paired image and text, and one with paired text and audio. How do we train a multimodal model that also works with paired image and audio? Here we introduce commutative and transitive pre-training (see also pseudocode.py): 
 
 1. Train a model to generate image from text, text from image, text from audio, and audio from text.
 2. Given a paired sample (image, text), we use the text to generate audio as a pseudo data point.
@@ -24,7 +24,7 @@ The input to the Transformer is a sequence of tokens. So we need to tokenize our
 
 ## Causal modeling
 
-The core of LoReTTa is next token prediction (also known as causal language modeling). Currently, it is the most popular framework for generative pre-training. During training the input and target are shifted by [one](https://github.com/jzhang38/TinyLlama/blob/bf122247c486b6b897050e98cbb7bedae8eeba73/pretrain/tinyllama.py#L165) and a [upper-triangular causal attention mask](https://github.com/karpathy/minGPT/blob/37baab71b9abea1b76ab957409a1cc2fbfba8a26/mingpt/model.py#L63) is used such that only the previous tokens can be used to generate the next.
+The core of LoReTTa is next token prediction (also known as causal language modeling). It is currently one of the most powerful frameworks for generative pre-training due to its data efficiency, as training can be effectively parallelized using attention masks. During training the input and target are shifted by [one](https://github.com/jzhang38/TinyLlama/blob/bf122247c486b6b897050e98cbb7bedae8eeba73/pretrain/tinyllama.py#L165) and a [upper-triangular causal attention mask](https://github.com/karpathy/minGPT/blob/37baab71b9abea1b76ab957409a1cc2fbfba8a26/mingpt/model.py#L63) is used such that only the previous tokens can be used to generate the next.
 
 ## Multimodal modeling
 
