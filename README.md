@@ -18,6 +18,10 @@ Imagine we have two datasets, one with paired image and text, and one with paire
 
 LoReTTa is a self-supervised learning framework that works with any modality-agnostic architecture. We choose the Transformer decoder for its simplicity and scalability. For the best performance, we recommend using its modern implementation based on [Llama](https://github.com/facebookresearch/llama/blob/main/llama/model.py) or [Mistral](https://github.com/mistralai/mistral-src/blob/main/mistral/model.py). We also enable [FlashAttention-2](https://github.com/Dao-AILab/flash-attention) to speed up training and inference time. Alternative models that can handle sequences like [Hyena](https://github.com/HazyResearch/flash-fft-conv) or [Mamba](https://github.com/state-spaces/mamba) can also be used.
 
+## Tokenization
+
+The input to the Transformer is a sequence of tokens. So we need to tokenize our data. For images, we use image patches as tokens; for text, we use subwords as tokens; and so on. Since we are modeling the data in pixel space, we can either use the raw discretized values or pre-trained [VQ-VAEs](https://github.com/openai/DALL-E). It is also possible to model the data in [latent space](https://arxiv.org/abs/2309.17080) to avoid using VQ-VAEs.
+
 ## Causal modeling
 
 The core of LoReTTa is next token prediction (also known as causal language modeling). Currently, it is the most popular framework for generative pre-training. During training the input and target are shifted by [one](https://github.com/jzhang38/TinyLlama/blob/bf122247c486b6b897050e98cbb7bedae8eeba73/pretrain/tinyllama.py#L165) and a [upper-triangular causal attention mask](https://github.com/karpathy/minGPT/blob/37baab71b9abea1b76ab957409a1cc2fbfba8a26/mingpt/model.py#L63) is used such that only the previous tokens can be used to generate the next.
