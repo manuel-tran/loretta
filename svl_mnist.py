@@ -47,8 +47,8 @@ def align_test(dataset, a_to_b, a_to_c):
 
     for i in range(num_cls):
         idx_cls = (tgt == i).nonzero(as_tuple=True)[0]
-        a_to_b += idx_cls.tolist()[0:1200]
-        a_to_c += idx_cls.tolist()[1200:2400]
+        a_to_b += idx_cls.tolist()[0:384]
+        a_to_c += idx_cls.tolist()[0:384]
 
     print(len(a_to_b), len(a_to_c))
     print(len(set(a_to_b + a_to_c)))
